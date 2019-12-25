@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_medecin_tree" model="ir.ui.view">
+            <field name="name">Medecin</field>
+            <field name="model">nutrition.medecin</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nom"/>
+                    <field name="prenom"/>
+                    <field name="specialite"/>
+                    <field name="grade"/>
+                    <field name="sexe"/>
+                    <field name="patient_id"/>
+                    <field name="listo"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_medecin_form" model="ir.ui.view">
+            <field name="name">Medecin</field>
+            <field name="model">nutrition.medecin</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Informations personnelles">
+                            <field name="nom"/>
+                            <field name="prenom"/>
+                            <field name="specialite"/>
+                            <field name="grade"/>
+                            <field name="sexe"/>
+                            <field name="patient_id"/>
+                            <field name="listo"/>
+                        </group>
+<!--
+                        <group string="Consultations">
+                            <field name="consultation_ids">
+                                <tree>
+                                    <field name="numero"/>
+                                    <field name="date"/>
+                                </tree>
+                            </field>
+                        </group>
+-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_medecin" model="ir.actions.act_window">
+            <field name="name">Medecin</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nutrition.medecin</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem id="menu_top_nutrition" name="Nutrition" sequence="0"/>
+        <menuitem id="menu_medecin" name="Medecin"
+                  parent="menu_top_nutrition" sequence="0" action="action_medecin"/>
+
+    </data>
+</odoo>
