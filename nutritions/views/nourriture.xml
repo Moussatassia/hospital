@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_nourriture_tree" model="ir.ui.view">
+            <field name="name">Nourriture</field>
+            <field name="model">nutrition.nourriture</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nom"/>
+                    <field name="typa"/>
+                    <field name="quantite"/>
+                    <field name="energie"/>
+                    <field name="indique"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_nourriture_form" model="ir.ui.view">
+            <field name="name">Nourriture</field>
+            <field name="model">nutrition.nourriture</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Informations de la nourriture">
+                            <field name="nom"/>
+                            <field name="typa"/>
+                            <field name="quantite"/>
+                            <field name="energie"/>
+                            <field name="indique"/>
+                        </group>
+<!--
+                        <group string="Consultations">
+                            <field name="consultation_ids">
+                                <tree>
+                                    <field name="numero"/>
+                                    <field name="date"/>
+                                </tree>
+                            </field>
+                        </group>
+-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_nourriture" model="ir.actions.act_window">
+            <field name="name">Nourriture</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nutrition.nourriture</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem id="menu_top_nutrition" name="Nutrition" sequence="0"/>
+        <menuitem id="menu_nourriture" name="Nourriture" parent="menu_top_nutrition" sequence="0" action="action_nourriture"/>
+
+    </data>
+</odoo>
