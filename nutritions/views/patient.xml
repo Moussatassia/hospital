@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_patient_tree" model="ir.ui.view">
+            <field name="name">Patient</field>
+            <field name="model">nutrition.patient</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Patient">
+                    <field name="nom" />
+                    <field name="prenom" />
+                    <field name="numero" />
+                    <field name="date_naissance" />
+                    <field name="age" />
+                    <field name="sexe" />
+                    <field name="adress" />
+                    <field name="groupe" />
+                    <field name="tel" />
+                    <field name="assurer" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_patient_form" model="ir.ui.view">
+            <field name="name">Patient</field>
+            <field name="model">nutrition.patient</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Patient">
+                    <sheet>
+                        <field name="photo" widget="image" class ="oe_left oe_avatar"/>
+                        <div class="oe_title">
+                            <h1>
+                                <table>
+                                    <tr>
+                                        <td style="padding-right:10px;"><field name="nom" required="1" placeholder="Nom" /></td>
+                                        <td style="padding-right:10px;"><field name="prenom" placeholder="Prénom" /></td>
+                                        <td style="padding-right:10px;"><field name="numero" placeholder="Numéro" /></td>
+                                    </tr>
+                                </table>
+                            </h1>
+                        </div>
+                        <notebook colspan="4">
+                            <page name="information_personnelle"
+                                string="Informations personnelles">
+                                <group col="4" colspan="4"
+                                    name="detail_personnel">
+                                    <field name="date_naissance" />
+                                    <field name="age" />
+                                    <field name="sexe" />
+                                    <field name="adress" />
+                                    <field name="groupe" />
+                                    <field name="tel" />
+                                    <field name="assurer" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_patient">
+            <field name="name">Patient</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nutrition.patient</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Creer un nouveau patient
+                </p>
+            </field>
+        </record>
+        <menuitem id="menu_top_nutrition" name="Nutrition" sequence="0"/>
+        <menuitem id="menu_patient" name="Patient" parent="menu_top_nutrition" sequence="0" action="action_patient"/>
+
+    </data>
+</odoo>
