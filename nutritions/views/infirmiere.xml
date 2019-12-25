@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_infirmiere_tree" model="ir.ui.view">
+            <field name="name">Infirmiere</field>
+            <field name="model">nutrition.infirmiere</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nom"/>
+                    <field name="prenom"/>
+                    <field name="matricule"/>
+                    <field name="grade"/>
+                    <field name="emploi"/>
+                    <field name="sexe"/>
+                    <field name="patient_id"/>
+                    <field name="medecin_ids"/>
+                    <field name="consultation_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_infirmiere_form" model="ir.ui.view">
+            <field name="name">Infirmiere</field>
+            <field name="model">nutrition.infirmiere</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Informations personnelles">
+                            <field name="nom"/>
+                            <field name="prenom"/>
+                            <field name="matricule"/>
+                            <field name="grade"/>
+                            <field name="emploi"/>
+                            <field name="sexe"/>
+                            <field name="patient_id"/>
+                            <field name="medecin_ids"/>
+                            <field name="consultation_ids"/>
+                        </group>
+                        <group string="Medeci">
+                            <field name="medecin_ids">
+                                <tree>
+                                    <field name="prenom"/>
+                                    <field name="specialite"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_infirmiere" model="ir.actions.act_window">
+            <field name="name">Infirmiere</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nutrition.infirmiere</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem id="menu_top_nutrition" name="Nutrition" sequence="0"/>
+        <menuitem id="menu_infirmiere" name="Infirmiere"
+                  parent="menu_top_nutrition" sequence="0" action="action_infirmiere"/>
+
+    </data>
+</odoo>
