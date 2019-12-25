@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_regime_tree" model="ir.ui.view">
+            <field name="name">Regime</field>
+            <field name="model">nutrition.regime</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nom"/>
+                    <field name="quantite"/>
+                    <field name="typologie"/>
+                    <field name="medicament_id"/>
+                    <field name="typealiment"/>
+                    <field name="ration"/>
+                    <field name="conseilethique"/>
+                    <field name="patient_id"/>
+                    <field name="maladie_id"/>
+                    <field name="nouriture_id"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_regime_form" model="ir.ui.view">
+            <field name="name">Regime</field>
+            <field name="model">nutrition.regime</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Informations">
+                            <tree>
+                                <field name="nom"/>
+                                <field name="quantite"/>
+                                <field name="typologie"/>
+                                <field name="medicament_id"/>
+                                <field name="typealiment"/>
+                                <field name="ration"/>
+                                <field name="conseilethique"/>
+                                <field name="patient_id"/>
+                                <field name="maladie_id"/>
+                                <field name="nouriture_id"/>
+
+                            </tree>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_regime" model="ir.actions.act_window">
+            <field name="name">Regime</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nutrition.regime</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem id="menu_top_nutrition" name="Nutrition" sequence="0"/>
+        <menuitem id="menu_regime" name="Regime" parent="menu_top_nutrition"
+                  sequence="0" action="action_regime"/>
+
+    </data>
+</odoo>
