@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_rdv_tree" model="ir.ui.view">
+            <field name="name">Rdv</field>
+            <field name="model">nutrition.rdv</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="numero"/>
+                    <field name="code"/>
+                    <field name="nom"/>
+                    <field name="date"/>
+                    <field name="heure"/>
+                    <field name="motif"/>
+                    <field name="medecin_id"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_rdv_form" model="ir.ui.view">
+            <field name="name">Rdv</field>
+            <field name="model">nutrition.rdv</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Informations de le Rdv">
+                            <field name="numero"/>
+                            <field name="code"/>
+                            <field name="nom"/>
+                            <field name="date"/>
+                            <field name="heure"/>
+                            <field name="motif"/>
+                        </group>
+                        <group string="Motif">
+                            <field name="medecin_id">
+                                <tree>
+                                    <field name="nom"/>
+                                    <field name="prenom"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_rdv" model="ir.actions.act_window">
+            <field name="name">Rdv</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nutrition.rdv</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem id="menu_top_nutrition" name="Nutrition" sequence="0"/>
+        <menuitem id="menu_rdv" name="Rdv" parent="menu_top_nutrition" sequence="0" action="action_rdv"/>
+
+    </data>
+</odoo>
