@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_diagnostique_tree" model="ir.ui.view">
+            <field name="name">Diagnostique</field>
+            <field name="model">nutrition.diagnostique</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="numero"/>
+                    <field name="nom"/>
+                    <field name="date"/>
+                    <field name="consultation_ids"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_diagnostique_form" model="ir.ui.view">
+            <field name="name">Diagnostique</field>
+            <field name="model">nutrition.diagnostique</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Informations de la Diagnostique">
+                            <field name="numero"/>
+                            <field name="nom"/>
+                            <field name="date"/>
+                        </group>
+                        <group string="Consultations">
+                            <field name="consultation_ids">
+                                <tree>
+                                    <field name="numero"/>
+                                    <field name="date"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_diagnostique" model="ir.actions.act_window">
+            <field name="name">Diagnostique</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nutrition.diagnostique</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem id="menu_top_nutrition" name="Nutrition" sequence="0"/>
+        <menuitem id="menu_diagnostique" name="Diagnostique" parent="menu_top_nutrition" sequence="0" action="action_diagnostique"/>
+
+    </data>
+</odoo>
