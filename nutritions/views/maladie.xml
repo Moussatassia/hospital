@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_maladie_tree" model="ir.ui.view">
+            <field name="name">Maladie</field>
+            <field name="model">nutrition.maladie</field>
+            <field name="arch" type="xml">
+               <form string ="Maladie" version="11.0">
+                   <group col="4">
+                       <field name="nom"/>
+                       <field name="numero"/>
+                       <field name="description"/>
+                       <field name="pathologie"/>
+                   </group>
+               </form>
+            </field>
+        </record>
+
+
+        <record id="action_maladie" model="ir.actions.act_window">
+            <field name="name">Maladie</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nutrition.maladie</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem id="menu_top_nutrition" name="Nutrition" sequence="0"/>
+        <menuitem id="menu_maladie" name="Maladie"
+                  parent="menu_top_nutrition" sequence="0" action="action_maladie"/>
+
+    </data>
+</odoo>
