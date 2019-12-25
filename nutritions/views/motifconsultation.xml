@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_motifconsultation_tree" model="ir.ui.view">
+            <field name="name">Motif</field>
+            <field name="model">nutrition.motifconsultation</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nom"/>
+                    <field name="numero"/>
+                    <field name="typologie"/>
+                    <field name="consultation_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_motifconsultation_form" model="ir.ui.view">
+            <field name="name">Motif</field>
+            <field name="model">nutrition.motifconsultation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Informations du motif">
+                            <field name="nom"/>
+                            <field name="numero"/>
+                            <field name="typologie"/>
+                            <field name="consultation_ids"/>
+                           <!--  <field name="consultation_ids"/>-->
+                        </group>
+                        <!--<group string="Consultations">
+                            <field name="consultation_ids">
+                                <tree>
+                                    <field name="numero"/>
+                                    <field name="date"/>
+                                </tree>
+                            </field>
+                        </group>
+                        -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_motifconsultation" model="ir.actions.act_window">
+            <field name="name">Motif</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nutrition.motifconsultation</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem id="menu_top_nutrition" name="Nutrition" sequence="0"/>
+        <menuitem id="menu_motifconsultation" name="Motif" parent="menu_top_nutrition" sequence="0" action="action_motifconsultation"/>
+
+    </data>
+</odoo>
