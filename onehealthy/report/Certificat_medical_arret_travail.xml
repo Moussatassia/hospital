@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="report_arret_travail" 
+            file="Certificat médical de bonne santé"  
+            model="oh.certificat_medical" 
+            name="onehealthy.arret_travail" 
+            report_type="qweb-pdf" 
+            string="Certificat médical d'arrêt de travail / de repos"
+            paperformat="onehealthy.paperformat_frenchcheck_foo"
+            attachment_use="True"
+        />
+
+        <template id="arret_travail">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                <div class="page">
+                    <div name='header'>
+                    <center>
+                        <b>
+                            <span style="font-family:Palatino Linotype ;font-size:16px ;" t-field="doc.company_id.name"/><br/>
+                            <span style="font-family:Palatino Linotype ;font-size:16px ;" t-field="doc.company_id.name_ar"/>
+                        </b>
+                    </center>
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td width="40%" class="text-left">
+                                    <img class="image"
+                                        src="onehealthy/static/logo/logo.png"
+                                        style="max-height:2.5cm; max-width:4cm; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;"
+                                    />
+                                </td>
+                                <td width="60%" class="text-center">
+                                    <center style="margin-top: 18px;">
+                                        <b style="font-family:Palatino Linotype ;font-size:18px ;">SERVICE DE : <span t-field="doc.company_id.specialite"/></b>
+                                    </center>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <center>
+                        <b style="font-family:Palatino Linotype ;font-size:20px ;">
+                            CERTIFICAT MÉDICAL D'ARRET DE TRAVAIL / DE REPOS<br/>
+                            شهادة طبية توقف عن العمل / إستراحة
+                        </b>
+                    </center>
+                    <div style="line-height: 90%;font-family:Palatino Linotype ;font-size:18px ;">
+                        <hr style="border-width: 2px; border-color:black"/>
+                        <p> <b>Nom et prénom du patient : </b> <span t-field="doc.patient_id.name"/> </p>
+                        <p> <b>Date de naissance : </b> <span t-field="doc.patient_id.date_of_birth"/></p>
+                        <p> <b>Âge : </b> <span t-field="doc.age"/></p>
+                        <t t-if="doc.patient_id.numero_assurance"><p> <b>N° d'immatriculation assuré social : </b> <span t-field="doc.patient_id.numero_assurance"/></p></t>
+                        <hr style="border-width: 2px; border-color:black"/>
+                    </div>
+                    <div style="font-size:18px ;">
+                        <p> Hospitaliser au service de : <span t-field="doc.company_id.specialite"/> </p>
+                        <br/>
+                        <p> Diagnostic : 
+                            <table width="100%" style="border-collapse: collapse;">
+                                <tbody class="invoice_tbody">
+                                    <tr t-foreach="doc.diagnostic_ids" t-as="l">
+                                        <td style="line-height: 100%;font-family:Palatino Linotype ;font-size:20px ;" class="text-left">- <span style="margin-left:20px;" t-field="l.name"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </p>
+                        <br/>
+                        <p> Date d'admission : <span t-field="doc.date_admission"/> , Date de sortie : <span t-field="doc.date_sortie"/></p>
+                        <br/>
+                        <p> Nécessite un arrêt de travail / un repos de : <span t-field="doc.motif_repos"/> </p>
+                        <p> Sauf complications.</p>
+                    </div>
+                </div>
+                <div style="line-height: 90%;font-family:Palatino Linotype ;font-size:18px ;" class="footer">
+                    <p>Fait à Tlemcen, le <span t-field="doc.date"/></p>
+                    <p><b>Le médecin traitant</b></p>
+                    <p>Nom et prénom : <span t-field="doc.user_id"/></p>
+                    <p> <b>Signature et cachet : </b> </p>
+                    <hr style="border-width: 2px; border-color:black"/>
+                    <center><b>Pour toute consultation / hospitalisation : présenter la carte d'identité, carte d'assurance ou carte de soins.</b></center>
+                </div>
+            </t>
+            </t>
+        </template>
+    </data>
+</odoo>
