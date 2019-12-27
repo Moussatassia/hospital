@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- FORM VIEW -->
+    <record id="examen_biologique_view_form" model="ir.ui.view">
+        <field name="name">Examen biologique</field>
+        <field name="model">oh.examen_biologique</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Examen biologique">
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id='examen_biologique_view_tree' model='ir.ui.view'>
+        <field name="name">Examen biologique</field>
+        <field name="model">oh.examen_biologique</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="examen_biologique_view_search" model="ir.ui.view">
+        <field name="name">Examen biologique</field>
+        <field name="model">oh.examen_biologique</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Examen biologique"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='examen_biologique_action' model='ir.actions.act_window'>
+        <field name="name">Examen biologique</field>
+        <field name="res_model">oh.examen_biologique</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="examen_biologique_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau examen biologique.
+          </p>
+        </field>
+    </record>
+
+    <!-- ######################################################################## -->
+
+    <!-- TREE VIEW -->
+    <record id="vue_examen_biologique_consultation_tree" model="ir.ui.view">
+        <field name="name">Examen biologique</field>
+        <field name="model">oh.examen_biologique_consultation</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <tree>
+                <field name="patient_id"/>
+                <field name="date"/>
+                <field name="examen_biologique_id"/>
+                <field name="note"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM VIEW -->
+    <record id="vue_examen_biologique_consultation_form" model="ir.ui.view">
+        <field name="name">Examen biologique</field>
+        <field name="model">oh.examen_biologique_consultation</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="a" col='4' colspan="4">
+                        <group col='2' colspan="2">
+                            <field name="patient_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group col='2' colspan="2">
+                            <field name="examen_biologique_id"/>
+                        </group>
+                    </group>
+                    <group name="b">
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id='examen_biologique_consultation_action' model='ir.actions.act_window'>
+        <field name="name">Examen biologique</field>
+        <field name="res_model">oh.examen_biologique_consultation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,from</field>
+    </record>
+</odoo>
