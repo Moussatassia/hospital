@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- FORM VIEW -->
+    <record id="temps_repas_view_form" model="ir.ui.view">
+        <field name="name">Temps du repas</field>
+        <field name="model">oh.temps_repas</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Temps du repas">
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id='temps_repas_view_tree' model='ir.ui.view'>
+        <field name="name">Temps du repas</field>
+        <field name="model">oh.temps_repas</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="temps_repas_view_search" model="ir.ui.view">
+        <field name="name">Temps du repas</field>
+        <field name="model">oh.temps_repas</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Temps du repas"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='temps_repas_action' model='ir.actions.act_window'>
+        <field name="name">Temps du repas</field>
+        <field name="res_model">oh.temps_repas</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="temps_repas_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau temps du repas.
+          </p>
+        </field>
+    </record>
+</odoo>
