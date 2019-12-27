@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FROM VIEW -->
+    <record id='consultation_view_form' model='ir.ui.view'>
+        <field name="name">Consultation</field>
+        <field name="model">oh.consultation</field>
+        <field name="arch" type="xml">
+            <form> 
+                <header>
+                    <button 
+                    name="button_confirmer" 
+                    type="object"
+                    string="Valider" states="ouverte"
+                    class="oe_highlight btn-success"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div name="smart_button" class="oe_right oe_button_box oe_inline">
+                        <button name="get_ancien_consultation" 
+                                type="object"
+                                class="oe_stat_button"
+                                string="Consultations anciennes">
+                                <img src="/onehealthy/static/icon/stethoscope.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                        <button name="get_antecedent" 
+                                type="object"
+                                class="oe_stat_button"
+                                string="Antécédents">
+                                <img src="/onehealthy/static/icon/antecedent.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                        <button name="get_radiologie" 
+                                type="object"
+                                class="oe_stat_button"
+                                string="Radiologie X">
+                                <img src="/onehealthy/static/icon/radio.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                        <button name="get_examen_biologique" 
+                                type="object"
+                                class="oe_stat_button"
+                                string="Examen biologique">
+                                <img src="/onehealthy/static/icon/biologique.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                        <button name="get_regime" 
+                            type="object"
+                            class="oe_stat_button"
+                            string="Nutrition">
+                            <img src="/onehealthy/static/icon/diet.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                        <button name="get_attachement" 
+                            type="object"
+                            class="oe_stat_button"
+                            string="Ajouter un attachement">
+                            <img src="/onehealthy/static/icon/folder.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                        <button name="new_rdv" 
+                            type="object"
+                            class="oe_stat_button"
+                            string="Créer un rendez-vous">
+                            <img src="/onehealthy/static/icon/calendar.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group name="user">
+                            <field name="user_id"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <group string="Informations sur le patient" col='4' colspan="4">
+                        <field name="patient_id"/>
+                        <field name="date_of_birth"/>
+                        <field name="assurance_maladie"/>
+                        <field name="age"/>
+                        <field name="ancien_diagnostic_ids" widget="many2many_tags"/>
+                        <field name="age_mois"/>
+                    </group>
+                    <group string="Informations sur la consultation" col='4' colspan="4">
+                        <label for="poids"/>
+                        <div>
+                            <field name="poids" class="oe_inline"/> kg
+                        </div>
+                        <field name="dspoids"/>
+                        <label for="taille"/>
+                        <div>
+                            <field name="taille" class="oe_inline"/> cm
+                        </div>
+                        <field name="dstaille"/>
+                        <field name="pc"/>
+                        <field name="dspc"/> 
+                    </group>
+                    <notebook>
+                        <page string="Consultation">
+                            <br/>
+                            <group col="4" colspan="4">
+                                <field name="diagnostic_ids" widget="many2many_tags"/>
+                                <field name="motif_consultation_ids" widget="many2many_tags"/>
+                                <field name="examen_clinique_ids" widget="many2many_tags"/>
+                            </group>
+                            <group name='champs_consultation' col="4" colspan="4">
+                                <label for="imc"/>
+                                <div>
+                                    <field name="imc" class="oe_inline"/> kg/m²
+                                </div>
+                                <field name="pa"/>
+                                <label for="t"/>
+                                <div>
+                                    <field name="t" class="oe_inline"/> c
+                                </div>
+                            </group>
+                        </page>
+                        <page string="Prescription médicale">
+                            <br/>
+                            <group>
+                                <field name="lait_id" widget="many2many_tags"/>
+                            </group>
+                            <field name="prescription_medicale_ids">
+                                <tree editable="bottom">
+                                    <field name="medicament_id"/>
+                                    <field name="quantite"/>
+                                    <field name="posologie"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="examen_biologique" string="Examen biologique">
+                            <br/>
+                            <field name="examen_biologique_ids" context="{'default_patient_id': patient_id,'default_date': date}">
+                                <tree editable='bottom'>
+                                    <field name="examen_biologique_id"/>
+                                    <field name="patient_id" invisible="1"/>
+                                    <field name="date" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Radiographie">
+                            <br/>
+                            <field name="radiographie_ids" context="{'default_patient_id': patient_id,'default_date': date}">
+                                <tree editable='bottom'>
+                                    <field name="radiographie_id"/>
+                                    <field name="patient_id" invisible="1"/>
+                                    <field name="date" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Observation">
+                        <group/>
+                        <div>
+                            <field name="description" placeholder="Autres Informations"/>
+                        </div>
+                    </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+	<!-- TREE VIEW -->
+    <record id='consultation_view_tree' model='ir.ui.view'>
+        <field name="name">Consultation</field>
+        <field name="model">oh.consultation</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'ouverte'" decoration-bf="state == 'ferme'">
+                <field name="date"/>
+            	<field name="patient_id"/>
+            	<field name="age"/>
+                <field name="poids"/>
+                <field name="taille"/>
+                <field name="user_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <!-- RECHERCHE -->
+    <record id="consultation_view_search" model="ir.ui.view">
+        <field name="name">Consultation</field>
+        <field name="model">oh.consultation</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id" string="Patient"/> 
+                <field name="date" string="Date"/>
+                <field name="user_id" string="Médecin"/>
+                <newline />
+                <group expand="0" string="Group By...">
+                    <filter name="patient_id" string="Patient" context="{'group_by':'patient_id'}" />
+                    <filter name="date" string="Date" context="{'group_by':'date:day'}" />
+                    <filter name="user_id" string="Médecin" context="{'group_by':'user_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- ACTION -->
+    <record id='consultation_action' model='ir.actions.act_window'>
+        <field name="name">Consultation</field>
+        <field name="res_model">oh.consultation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="consultation_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouvelle consultation.
+          </p>
+        </field>
+    </record>
+
+    <record id='consultation_en_attente_action' model='ir.actions.act_window'>
+        <field name="name">Consultation en attente</field>
+        <field name="res_model">oh.consultation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="consultation_view_search"/>
+        <field name="domain">[('state','=','ouverte')]</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouvelle consultation.
+          </p>
+        </field>
+    </record>
+</odoo>
