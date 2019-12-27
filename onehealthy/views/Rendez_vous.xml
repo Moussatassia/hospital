@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FROM VIEW -->
+    <record id='rdv_view_form' model='ir.ui.view'>
+        <field name="name">Rendez-vous</field>
+        <field name="model">oh.rdv</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="button_confirmer" states="brouillon" string="Confirmer" class="oe_highlight" type="object"/>
+                    <button name="button_indisponible" states="confirme" string="Indisponible" class="oe_highlight" type="object"/>
+                    <button name="button_en_attente" states="confirme,indisponible" string="En attente" class="oe_highlight" type="object"/>
+                    <button name="button_consultation" states="confirme,en_attente" string="En consultation" class="oe_highlight" type="object"/>
+                    <button name="button_annuler" states="brouillon,confirme,indisponible,en_attente" string="Annuler" class="oe_highlight" type="object"/>
+                    <field name="state" statusbar_visible="brouillon,confirme,indisponible,en_attente,en_consultation" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="user_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="date"/>
+                        </group>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                        </group>
+                        <group>
+                            <field name="date_of_birth"/>
+                            <field name="age"/>
+                        </group>
+                    </group>
+                    <group/>
+                    <label for="description"/>
+                    <div>
+                        <field name="description" placeholder="Notes sur la pièce jointe..."/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+	<!-- TREE VIEW -->
+    <record id='rdv_view_tree' model='ir.ui.view'>
+        <field name="name">Rendez-vous</field>
+        <field name="model">oh.rdv</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="state=='annule'" decoration-warning="state=='indisponible'" decoration-info="state in ('confirme','en_attente')">
+            	<field name="patient_id"/>
+            	<field name="date_of_birth"/>
+            	<field name="age"/>
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <!-- RECHERCHE -->
+    <record id="rdv_view_search" model="ir.ui.view">
+        <field name="name">Rendez-vous</field>
+        <field name="model">oh.rdv</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id" string="Patient"/> 
+                <field name="date" string="Date"/>
+                <field name="user_id" string="Médecin"/> 
+                <field name="state" string="État"/>
+                <newline />
+                <group expand="0" string="Group By...">
+                    <filter name="patient_id" string="Patient" context="{'group_by':'patient_id'}" />
+                    <filter name="date" string="Date" context="{'group_by':'date:day'}" />
+                    <filter name="user_id" string="Médecin" context="{'group_by':'user_id'}" />
+                    <filter name="state" string="État" context="{'group_by':'state'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- CALENDAR -->
+    <record id="rdv_view_calendar" model="ir.ui.view">
+        <field name="name">Rendez-vous</field>
+        <field name="model">oh.rdv</field>
+        <field name="arch" type="xml">
+            <calendar color="patient_id" date_start="date" quick_add="False" mode="month">
+                <field name="patient_id"/>
+                <field name="date"/>
+            </calendar>
+        </field>
+    </record>
+    <!-- ACTION -->
+    <record id='rdv_action' model='ir.actions.act_window'>
+        <field name="name">Rendez-vous</field>
+        <field name="res_model">oh.rdv</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">calendar,tree,form</field>
+        <field name="search_view_id" ref="rdv_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un noveau rendez-vous.
+          </p>
+        </field>
+    </record>
+</odoo>
