@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- FORM VIEW -->
+    <record id="radiographie_view_form" model="ir.ui.view">
+        <field name="name">Radiographie</field>
+        <field name="model">oh.radiographie</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Radiographie">
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id='radiographie_view_tree' model='ir.ui.view'>
+        <field name="name">Radiographie</field>
+        <field name="model">oh.radiographie</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="radiographie_view_search" model="ir.ui.view">
+        <field name="name">Radiographie</field>
+        <field name="model">oh.radiographie</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="radiographie"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='radiographie_action' model='ir.actions.act_window'>
+        <field name="name">Radiographie</field>
+        <field name="res_model">oh.radiographie</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="radiographie_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau radiographie.
+          </p>
+        </field>
+    </record>
+
+    <!-- ######################################################################## -->
+
+    <!-- TREE VIEW -->
+    <record id="vue_radiographie_consultation_tree" model="ir.ui.view">
+        <field name="name">Radiographie</field>
+        <field name="model">oh.radiographie_consultation</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <tree>
+                <field name="patient_id"/>
+                <field name="date"/>
+                <field name="radiographie_id"/>
+                <field name="note"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM VIEW -->
+    <record id="vue_radiographie_consultation_form" model="ir.ui.view">
+        <field name="name">Radiographie</field>
+        <field name="model">oh.radiographie_consultation</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="a" col='4' colspan="4">
+                        <group col='2' colspan="2">
+                            <field name="patient_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group col='2' colspan="2">
+                            <field name="radiographie_id"/>
+                        </group>
+                    </group>
+                    <group name="b">
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id='radiographie_consultation_action' model='ir.actions.act_window'>
+        <field name="name">Examen biologique</field>
+        <field name="res_model">oh.radiographie_consultation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,from</field>
+    </record>
+</odoo>
