@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FROM VIEW -->
+    <record id='attachment_view_form' model='ir.ui.view'>
+        <field name="name">Attachement</field>
+        <field name="model">oh.attachment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <label for="name"/>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <br/>
+                    <group col='4' colspan="4">
+                        <field name="patient_id"/>
+                        <field name="user_id" readonly="1"/>
+                        <field name="datas" filename="datas_fname" />
+                        <field name="date" readonly="1"/>
+                        <field name="datas_fname" invisible="1" class="oe_inline oe_right"/>
+                    </group>
+                    <label for="description"/>
+                    <div>
+                        <field name="description" placeholder="Notes sur la pièce jointe..."/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+	<!-- TREE VIEW -->
+    <record id='attachment_view_tree' model='ir.ui.view'>
+        <field name="name">Attachement</field>
+        <field name="model">oh.attachment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="patient_id"/>
+                <field name="name"/>
+                <field name="datas_fname"/>
+                <field name="user_id"/>
+                <field name="date"/>
+                <field name="company_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+    <!-- RECHERCHE -->
+    <record id="attachment_view_search" model="ir.ui.view">
+        <field name="name">Attachement</field>
+        <field name="model">oh.attachment</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id" string="Patient"/> 
+                <field name="date" string="Date"/>
+                <field name="user_id" string="Médecin"/> 
+                <field name="name" string="Nom de la pièce jointe"/>
+                <field name="datas_fname" string="Nom de fichier"/>
+                <newline />
+                <group expand="0" string="Group By...">
+                    <filter name="patient_id" string="Patient" context="{'group_by':'patient_id'}" />
+                    <filter name="date" string="Date" context="{'group_by':'date:week'}" />
+                    <filter name="user_id" string="Médecin" context="{'group_by':'user_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- ACTION -->
+    <record id='attachment_action' model='ir.actions.act_window'>
+        <field name="name">Attachement</field>
+        <field name="res_model">oh.attachment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="attachment_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouvelle attachement.
+          </p>
+        </field>
+    </record>
+</odoo>
