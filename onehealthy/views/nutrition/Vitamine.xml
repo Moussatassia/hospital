@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- FORM VIEW -->
+    <record id="vitamine_view_form" model="ir.ui.view">
+        <field name="name">Vitamine</field>
+        <field name="model">oh.vitamine</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Vitamine">
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id='vitamine_view_tree' model='ir.ui.view'>
+        <field name="name">Vitamine</field>
+        <field name="model">oh.vitamine</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="vitamine_view_search" model="ir.ui.view">
+        <field name="name">Vitamine</field>
+        <field name="model">oh.vitamine</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Vitamine"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='vitamine_action' model='ir.actions.act_window'>
+        <field name="name">Vitamine</field>
+        <field name="res_model">oh.vitamine</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="vitamine_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau vitamine.
+          </p>
+        </field>
+    </record>
+</odoo>
