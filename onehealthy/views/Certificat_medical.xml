@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FROM VIEW -->
+    <record id='certificat_medical_view_form' model='ir.ui.view'>
+        <field name="name">Certificat médical</field>
+        <field name="model">oh.certificat_medical</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Informations sur le patient">
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="age"/>
+                        </group>
+                        <group>
+                            <field name="date_of_birth"/>
+                        </group>
+                    </group>
+                    <group string="Certificat médical">
+                        <field name="type"/>
+                    </group>
+                    <group col='4' colspan="4" attrs="{'invisible': [('type','!=','Travail')]}">
+                        <field name="diagnostic_ids" widget="many2many_tags" col='4' colspan="4"/>
+                        <field name="date_admission"/>
+                        <field name="date_sortie"/>
+                        <field name="motif_repos" col='4' colspan="4"/>
+                    </group>
+                    <div class="oe_clear"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+	<!-- TREE VIEW -->
+    <record id='certificat_medical_view_tree' model='ir.ui.view'>
+        <field name="name">Certificat médical</field>
+        <field name="model">oh.certificat_medical</field>
+        <field name="arch" type="xml">
+            <tree>
+            	<field name="patient_id"/>
+            	<field name="date_of_birth"/>
+            	<field name="age"/>
+                <field name="date"/>
+                <field name="user_id"/>
+            </tree>
+        </field>
+    </record>
+    <!-- RECHERCHE -->
+    <record id="certificat_medical_view_search" model="ir.ui.view">
+        <field name="name">Certificat médical</field>
+        <field name="model">oh.certificat_medical</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id" string="Patient"/> 
+                <field name="date" string="Date"/>
+                <field name="user_id" string="Médecin"/> 
+                <newline />
+                <group expand="0" string="Group By...">
+                    <filter name="patient_id" string="Patient" context="{'group_by':'patient_id'}" />
+                    <filter name="date" string="Date" context="{'group_by':'date:week'}" />
+                    <filter name="user_id" string="Médecin" context="{'group_by':'user_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- ACTION -->
+    <record id='certificat_medical_action' model='ir.actions.act_window'>
+        <field name="name">Certificat médical</field>
+        <field name="res_model">oh.certificat_medical</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="certificat_medical_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un noveau certificat médical.
+          </p>
+        </field>
+    </record>
+</odoo>
