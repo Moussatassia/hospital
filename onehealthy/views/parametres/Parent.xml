@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FROM VIEW -->
+    <record id='parent_view_form' model='ir.ui.view'>
+        <field name="name">Parent</field>
+        <field name="model">oh.parent</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div name="title_name" class="oe_title oe_inline">
+                        <h1>
+                            <field name="name" placeholder="Nom et prénom"/>
+                        </h1>
+                    </div>
+                    <group/>
+                    <group>
+                        <field name="patient_id"/>
+                    </group>
+                    <group string="Informations personnelles" col='4' colspan="4">
+                        <field name="type"/>
+                        <field name="etat_sante"/>
+                        <field name="profession_id"/>
+                        <field name="situation"/>
+                        <field name="date_naissance"/>
+                        <field name="age"/>
+                    </group>
+                    <group col='4' colspan="4">
+                        <group string="Groupe sanguin" col='2' colspan="2">
+                            <field name="groupe_sanguin"/>
+                            <field name="phenotype_id"/>
+                        </group>
+                        <group string="Coordonnées de contact" col='2' colspan="2">
+                            <field name="numero_telephone" widget="mask" data-inputmask-mask="9999 99 99 99"/>
+                            <field name="adresse_electronique"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+	<!-- TREE VIEW -->
+    <record id='parent_view_tree' model='ir.ui.view'>
+        <field name="name">Parent</field>
+        <field name="model">oh.parent</field>
+        <field name="arch" type="xml">
+            <tree>
+            	<field name="name"/>
+                <field name="patient_id"/>
+                <field name="type"/>
+                <field name="numero_telephone"/>
+            </tree>
+        </field>
+    </record>
+    <!-- KANBAN VIEW -->
+    <record id="parent_view_kanban" model="ir.ui.view">
+        <field name="name">Parent</field>
+        <field name="model">oh.parent</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src='_s + "/base/static/src/img/avatar.png"'/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="oe_partner_heading"><field name="name"/></strong>
+                                <ul>
+                                    <li t-if="record.numero_telephone.raw_value">Numéro de téléphone : <field name="numero_telephone"/></li>
+                                    <li t-if="record.type.raw_value">Consanguinité : <field name="type"/></li>
+                                    <li t-if="record.patient_id.raw_value">Patient : <field name="patient_id"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!-- ACTION -->
+    <record id='parent_action' model='ir.actions.act_window'>
+        <field name="name">Parent</field>
+        <field name="res_model">oh.parent</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau parent.
+          </p>
+        </field>
+    </record>
+</odoo>
