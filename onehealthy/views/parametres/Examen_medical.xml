@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- FORM VIEW -->
+    <record id="examen_medical_view_form" model="ir.ui.view">
+        <field name="name">Examen médical</field>
+        <field name="model">oh.examen_medical</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Examen médical">
+                        <field name="name" />
+                        <field name="prix"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id='examen_medical_view_tree' model='ir.ui.view'>
+        <field name="name">Examen médical</field>
+        <field name="model">oh.examen_medical</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+                <field name="prix"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="examen_medical_view_search" model="ir.ui.view">
+        <field name="name">Examen médical</field>
+        <field name="model">oh.examen_medical</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Examen médical"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='examen_medical_action' model='ir.actions.act_window'>
+        <field name="name">Examen médical</field>
+        <field name="res_model">oh.examen_medical</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="examen_medical_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau examen médical.
+          </p>
+        </field>
+    </record>
+</odoo>
