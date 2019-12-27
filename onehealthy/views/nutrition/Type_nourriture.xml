@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- FORM VIEW -->
+    <record id="type_nourriture_view_form" model="ir.ui.view">
+        <field name="name">Type nourriture</field>
+        <field name="model">oh.type_nourriture</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Type nourriture">
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id='type_nourriture_view_tree' model='ir.ui.view'>
+        <field name="name">Type nourriture</field>
+        <field name="model">oh.type_nourriture</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="type_nourriture_view_search" model="ir.ui.view">
+        <field name="name">Type nourriture</field>
+        <field name="model">oh.type_nourriture</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Type nourriture"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='type_nourriture_action' model='ir.actions.act_window'>
+        <field name="name">Type nourriture</field>
+        <field name="res_model">oh.type_nourriture</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="type_nourriture_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau type nourriture.
+          </p>
+        </field>
+    </record>
+</odoo>
