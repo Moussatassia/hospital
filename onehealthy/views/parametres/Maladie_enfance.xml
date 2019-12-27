@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	   <!-- FORM VIEW -->
+    <record id="maladie_enfance_view_form" model="ir.ui.view">
+        <field name="name">Maladie de l'enfance</field>
+        <field name="model">oh.maladie_enfance</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Maladie de l'enfance">
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id='maladie_enfance_view_tree' model='ir.ui.view'>
+        <field name="name">Maladie de l'enfance</field>
+        <field name="model">oh.maladie_enfance</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="maladie_enfance_view_search" model="ir.ui.view">
+        <field name="name">Maladie de l'enfance</field>
+        <field name="model">oh.maladie_enfance</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Maladie de l'enfance"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='maladie_enfance_action' model='ir.actions.act_window'>
+        <field name="name">Maladie de l'enfance</field>
+        <field name="res_model">oh.maladie_enfance</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="maladie_enfance_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer une nouvelle maladie de l'enfance.
+          </p>
+        </field>
+    </record>
+</odoo>
