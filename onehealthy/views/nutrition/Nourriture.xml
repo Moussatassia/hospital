@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- FORM VIEW -->
+    <record id="nourriture_view_form" model="ir.ui.view">
+        <field name="name">Nourriture</field>
+        <field name="model">oh.nourriture</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Nourriture"/>
+                    <field name="photo" widget="image" class ="oe_left oe_avatar"/>
+                    <group col="4" colspan="4">
+                        <field name="name" />
+                        <field name="type_nourriture_id"/>
+                        <field name="calorie" />
+                        <field name="lipide"/>
+                        <field name="glucide" />
+                        <field name="proteine"/>
+                    </group>
+                    <br/>
+                    <notebook>
+                        <page string="Valeurs nutritionnelles">
+                            <field name="valeur_nutritionnelle_ids">
+                                <tree editable="bottom">
+                                    <field name="valeur_nutritionnelle_id" />
+                                    <field name="portion" />
+                                    <field name="dv" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Vitamines">
+                            <field name="vitamine_ids">
+                                <tree editable="bottom">
+                                    <field name="vitamine_id" />
+                                    <field name="portion" />
+                                    <field name="dv" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Minéraux">
+                            <field name="mineral_ids">
+                                <tree editable="bottom">
+                                    <field name="mineral_id" />
+                                    <field name="portion" />
+                                    <field name="dv" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id='nourriture_view_tree' model='ir.ui.view'>
+        <field name="name">Nourriture</field>
+        <field name="model">oh.nourriture</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="nourriture_view_search" model="ir.ui.view">
+        <field name="name">Nourriture</field>
+        <field name="model">oh.nourriture</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Nourriture"/>
+            </search>
+        </field>
+    </record>
+    <!-- KANBAN VIEW -->
+    <record id="nourriture_view_kanban" model="ir.ui.view">
+        <field name="name">Nourriture</field>
+        <field name="model">oh.nourriture</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_res_partner_kanban">
+                            <div class="oe_kanban_global_click o_kanban_image">
+                                <field name="photo" widget='image' class="oe_left oe_avatar oe_inline"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="oe_partner_heading"><field name="name"/></strong>
+                                <ul>
+                                    <li t-if="record.type_nourriture_id.raw_value">Type nourriture : <field name="type_nourriture_id"/></li>
+                                    <li t-if="record.calorie.raw_value">Calorie : <field name="calorie"/></li>
+                                    <li t-if="record.lipide.raw_value">Lipide : <field name="lipide"/></li>
+                                    <li t-if="record.glucide.raw_value">Glucide : <field name="glucide"/></li>
+                                    <li t-if="record.proteine.raw_value">Protéine : <field name="proteine"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!-- ACTION -->
+    <record id='nourriture_action' model='ir.actions.act_window'>
+        <field name="name">Nourriture</field>
+        <field name="res_model">oh.nourriture</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="nourriture_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau nourriture.
+          </p>
+        </field>
+    </record>
+</odoo>
