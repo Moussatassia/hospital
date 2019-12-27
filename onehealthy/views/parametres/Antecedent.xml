@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FORM VIEW -->
+    <record id='antecedent_form' model='ir.ui.view'>
+        <field name="name">Antécédent</field>
+        <field name="model">oh.antecedent</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Antécédent">
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id='antecedent_tree' model='ir.ui.view'>
+        <field name="name">Antécédent</field>
+        <field name="model">oh.antecedent</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="antecedent_search" model="ir.ui.view">
+        <field name="name">Antécédent</field>
+        <field name="model">oh.antecedent</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Antécédent"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='antecedent__action' model='ir.actions.act_window'>
+        <field name="name">Antécédent</field>
+        <field name="res_model">oh.antecedent</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="antecedent_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau antécédent.
+          </p>
+        </field>
+    </record>
+
+    <!-- FORM VIEW -->
+    <record id='antecedent_view_form' model='ir.ui.view'>
+        <field name="name">Antécédent</field>
+        <field name="model">oh.antecedent_ligne</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Antécédent" col='4' colspan="4">
+                        <field name="antecedent_id"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+	<!-- TREE VIEW -->
+    <record id='antecedent_view_tree' model='ir.ui.view'>
+        <field name="name">Antécédent</field>
+        <field name="model">oh.antecedent_ligne</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="antecedent_id"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="antecedent_view_search" model="ir.ui.view">
+        <field name="name">Antécédent</field>
+        <field name="model">oh.antecedent_ligne</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="antecedent_id" string="Antécédent"/>
+                <field name="name" string="Détail antécédent"/>
+                <group expand="0" string="Group by...">
+                    <filter string="Antécédent" name="antecedent_id" context="{'group_by':'antecedent_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='antecedent_action' model='ir.actions.act_window'>
+        <field name="name">Antécédent</field>
+        <field name="res_model">oh.antecedent_ligne</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="antecedent_view_search"/>
+        <field name="context">{'group_by':'antecedent_id'}</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau antécédent.
+          </p>
+        </field>
+    </record>
+
+    <!-- ######################################################################## -->
+
+    <!-- TREE VIEW -->
+    <record id="vue_antecedent_patient_tree" model="ir.ui.view">
+        <field name="name">Antécédent</field>
+        <field name="model">oh.antecedent_patient</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <tree>
+                <field name="patient_id"/>
+                <field name="antecedent_id"/>
+                <field name="antecedent_detail_id"/>
+                <field name="note"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM VIEW -->
+    <record id="vue_antecedent_patient_form" model="ir.ui.view">
+        <field name="name">Antécédent</field>
+        <field name="model">oh.antecedent_patient</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="a" col='4' colspan="4">
+                        <group col='2' colspan="2">
+                            <field name="patient_id"/>
+                        </group>
+                        <group col='2' colspan="2">
+                            <field name="antecedent_id"/>
+                            <field name="antecedent_detail_id"/>
+                        </group>
+                    </group>
+                    <group name="b">
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="antecedent_patient_view_search" model="ir.ui.view">
+        <field name="name">Antécédent</field>
+        <field name="model">oh.antecedent_patient</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id" string="Patient"/>
+                <field name="antecedent_id" string="Antécédent"/>
+                <field name="antecedent_detail_id" string="Détail antécédent"/>
+                <group expand="0" string="Group by...">
+                    <filter string="Antécédent" name="antecedent_id" context="{'group_by':'antecedent_id'}" />
+                    <filter string="Patient" name="patient_id" context="{'group_by':'patient_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id='antecedent_patient_action' model='ir.actions.act_window'>
+        <field name="name">Antécédent</field>
+        <field name="res_model">oh.antecedent_patient</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,from</field>
+        <field name="search_view_id" ref="antecedent_patient_view_search"/>
+        <field name="context">{'group_by':'antecedent_id'}</field>
+    </record>
+</odoo>
