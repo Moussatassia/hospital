@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FROM VIEW -->
+    <record id='regime_view_form' model='ir.ui.view'>
+        <field name="name">Régime</field>
+        <field name="model">oh.regime</field>
+        <field name="arch" type="xml">
+            <form> 
+                <sheet>
+                    <group>
+                        <group name="user">
+                            <field name="user_id"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <group string="Informations sur le patient" col='4' colspan="4">
+                        <field name="patient_id"/>
+                        <field name="date_of_birth"/>
+                        <field name="assurance_maladie"/>
+                        <field name="age"/>
+                        <field name="ancien_diagnostic_ids" widget="many2many_tags"/>
+                        <field name="age_mois"/>
+                    </group>
+                    <group string="Informations sur le régime" col='4' colspan="4">
+                        <field name="date_debut"/>
+                        <field name="duree"/>
+                        <field name="date_fin"/>
+                    </group>
+                    <notebook>
+                        <page string="Détails du régime">
+                            <br/>
+                            <p attrs="{'invisible':[('patient_id','!=',False)]}">Veuillez sélectionner un patient s'il vous plait</p>
+                            <field name="regime_ids" attrs="{'readonly':[('patient_id','=',False)]}" context="{'default_patient_id': patient_id,'default_date': date}">
+                                <form>
+                                    <group>
+                                        <field name="temps_repas_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="patient_id" invisible="1"/>
+                                        <field name="date" invisible="1"/>
+                                    </group>
+                                    <div>
+                                        <field name="detail_ids" context="{'default_patient_id': patient_id,'default_date': date,'default_temps_repas_id': temps_repas_id}">
+                                            <tree editable="button">
+                                                <field name="patient_id" invisible="1"/>
+                                                <field name="date" invisible="1"/>
+                                                <field name="temps_repas_id" invisible="1"/>
+                                                <field name="nourriture_id"/>
+                                                <field name="qte"/>
+                                            </tree>
+                                        </field>
+                                    </div>
+                                </form>
+                                <tree>
+                                    <field name="temps_repas_id"/>
+                                    <field name="regimes"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+	<!-- TREE VIEW -->
+    <record id='regime_view_tree' model='ir.ui.view'>
+        <field name="name">Régime</field>
+        <field name="model">oh.regime</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+            	<field name="patient_id"/>
+            	<field name="age"/>
+                <field name="user_id"/>
+            </tree>
+        </field>
+    </record>
+    <!-- RECHERCHE -->
+    <record id="regime_view_search" model="ir.ui.view">
+        <field name="name">Régime</field>
+        <field name="model">oh.regime</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id" string="Patient"/> 
+                <field name="date" string="Date"/>
+                <field name="user_id" string="Médecin"/>
+                <newline />
+                <group expand="0" string="Group By...">
+                    <filter name="patient_id" string="Patient" context="{'group_by':'patient_id'}" />
+                    <filter name="date" string="Date" context="{'group_by':'date:day'}" />
+                    <filter name="user_id" string="Médecin" context="{'group_by':'user_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- ACTION -->
+    <record id='regime_action' model='ir.actions.act_window'>
+        <field name="name">Régime</field>
+        <field name="res_model">oh.regime</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="regime_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau régime.
+          </p>
+        </field>
+    </record>
+</odoo>
