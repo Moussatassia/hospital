@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FORM VIEW -->
+    <record id="res_company_form_inherit" model="ir.ui.view">
+        <field name="name">Établissement</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//form" position="attributes">
+                    <attribute name="delete">false</attribute>
+                    <attribute name="create">false</attribute>
+                </xpath>
+                <xpath expr="//div[@class='oe_title']" position="replace">
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h3>
+                            <field name="name" placeholder="Français"/><br/>
+                            <field name="name_ar" placeholder="العربية"/>
+                        </h3>
+                    </div>
+                </xpath>
+                <xpath expr="//notebook/page" position="replace">
+                    <page string='Informations générales'>
+                        <group name="service">
+                            <group name="company">
+                                <field name="partner_id" readonly="1" required="0" groups="base.group_no_one" invisible="1"/>
+                                <field name="user_id"/>
+                                <label for="street" string="Address"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Cité ..." class="o_address_street"/>
+                                    <field name="address_daira" placeholder="Commune" class="o_address_city" options='{"no_open": True}'/>
+                                    <field name="state_id" class="o_address_state" placeholder="Ville" options='{"no_open": True}'/>
+                                    <field name="zip" placeholder="Code postal" class="o_address_zip"/>
+                                    <field name="country_id" placeholder="Pays" class="o_address_country" options='{"no_open": True}'/>
+                                </div>
+                                <field name="specialite"/>
+                            </group>
+                            <group>
+                                <field widget="mask" data-inputmask-mask="9999 99 99 99" name="phonee"/>
+                                <field widget="mask" data-inputmask-mask="999 99 99 99" name="fixe"/>
+                                <field widget="mask" data-inputmask-mask="999 99 99 99" name="faxe"/>
+                                <field name="emaile"/>
+                                <field name="websitee" widget="url"/>
+                            </group>
+                            <group invisible="1">
+                                <field name="website"  invisible="1" widget="url" placeholder="e.g. www.odoo.com"/>
+                                <field name="phone" invisible="1"/>
+                                <field name="email" invisible="1"/>
+                                <field name="vat" />
+                                <field name="company_registry"/>
+                                <field name="parent_id"  groups="base.group_multi_company"/>
+                                <field name="sequence" invisible="1"/>
+                                <field name="report_footer" placeholder="e.g. Your Bank Accounts, one per line"/>
+                                <field name="report_header" placeholder="e.g. Global Business Solutions"/>
+                            </group>
+                            <group name="social_media"/>
+                        </group>
+                    </page>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="res_company_3_form_inherit" model="ir.ui.view">
+        <field name="name">Établissement</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="backend_theme_v11.res_company_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//page[@name='background']" position="replace">
+                    <page name="background" string="Apps Dashboard" invisible="1">
+                        <group name="dashboard_settings">
+                            <field name="dashboard_background" widget="image" class="oe_avatar"/>
+                        </group>
+                    </page>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="res_company_tree_inherit" model="ir.ui.view">
+        <field name="name">Établissement</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_tree"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//tree" position="replace">
+                    <tree create="false" delete="false">
+                        <field name="name"/>
+                        <field name="phonee"/>
+                        <field name="fixe"/>
+                        <field name="faxe"/>
+                        <field name="street"/>
+                        <field name="address_daira"/>
+                    </tree>
+                </xpath>
+            </data>
+        </field>
+    </record>
+    <record id="res_company_kanban_inherit" model="ir.ui.view">
+        <field name="name">Établissement</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_res_company_kanban"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//kanban" position="replace">
+                    <kanban create="false" delete="false">
+                        <field name="name"/>
+                        <field name="phonee"/>
+                        <field name="fixe"/>
+                        <field name="faxe"/>
+                        <field name="emaile"/>
+                        <templates>
+                            <t t-name="kanban-box">
+                                <div t-attf-class="oe_kanban_global_click">
+                                    <div class="text-center">
+                                        <i class="fa fa-building" aria-hidden="true"></i> <strong><field name="name"/></strong>
+                                    </div>
+                                    <hr class="mt4 mb4"/>
+                                    <div class="o_kanban_image">
+                                        <field name="logo" widget='image' class="oe_left oe_avatar oe_inline" options='{"preview_image": "image_medium"}'/>
+                                    </div>
+                                    <div class="oe_kanban_details">
+                                        <div t-if="record.emaile.value">
+                                            <strong>E-mail : <field name="emaile"/></strong>
+                                        </div>
+                                        <div t-if="record.phonee.value">
+                                            <strong>Portable : <field name="phonee"/></strong>
+                                        </div>
+                                        <div t-if="record.fixe.value">
+                                            <strong>Tél. Fixe : <field name="fixe"/></strong>
+                                        </div>
+                                        <div t-if="record.faxe.value">
+                                            <strong>Tél. Faxe : <field name="faxe"/></strong>
+                                        </div>
+                                        <div name="adresse">
+                                            <strong>Adresse : <field name="street"/>, <field name="address_daira"/>, <field name="state_id"/></strong>
+                                        </div>
+                                    </div>
+                                    <hr class="mt4 mb4"/>
+                                </div>
+                            </t>
+                        </templates>
+                    </kanban>
+                </xpath>
+            </data>
+        </field>
+    </record>
+    <record id="base.action_res_company_form" model="ir.actions.act_window">
+        <field name="name">Établissement</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.company</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+</odoo>
