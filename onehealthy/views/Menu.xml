@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		
+		<menuitem id="patient_top" name="Patient" sequence="10" web_icon="onehealthy,static/description/menu_patient.png"/>
+			<menuitem id="patient_menu" name="Patient" sequence="1"
+				 parent="patient_top" action="patient_action"/>
+			<menuitem id="parent_menu" name="Parent" sequence="2"
+				 parent="patient_top" action="parent_action"/>
+
+		<menuitem id="consultation_top" name="Consultation" sequence="20" web_icon="onehealthy,static/description/menu_consultation.png"/>
+			<menuitem id="consultation_menu" name="Consultation" sequence="1"
+				 parent="consultation_top" action="consultation_action"/>
+			<menuitem id="consultation_attente_menu" name="Consultation en attente" sequence="1"
+				 parent="consultation_top" action="consultation_en_attente_action"/>
+			<menuitem id="certificat_medical_menu" name="Certificat médical" sequence="2"
+				 parent="consultation_top" action="certificat_medical_action"/>
+
+		<menuitem id="certificat_medical_top" name="Certificat médical" sequence="21" web_icon="onehealthy,static/description/certificat.png" action="certificat_medical_action"/>
+
+		<menuitem id="nutrition_top" name="Nutrition" sequence="22" web_icon="onehealthy,static/description/nutrition.png"/>
+			<menuitem id="regime_menu" name="Régime" sequence="3"
+				 parent="nutrition_top" action="regime_action"/>
+			<menuitem id="nourriture_menu" name="Nourriture" sequence="5"
+				 parent="nutrition_top" action="nourriture_action"/>
+			<menuitem id="type_nourriture_menu" name="Type nourriture" sequence="10"
+				 parent="nutrition_top" action="type_nourriture_action"/>
+			<menuitem id="composition_nourriture_menu" name="Composition nourriture" sequence="11"
+				 parent="nutrition_top"/>
+				 <menuitem id="valeur_nutritionnelle_menu" name="Valeur nutritionnelle" sequence="1"
+				 parent="composition_nourriture_menu" action="valeur_nutritionnelle_action"/>
+				 <menuitem id="vitamine_action_menu" name="Vitamine" sequence="2"
+				 parent="composition_nourriture_menu" action="vitamine_action"/>
+				 <menuitem id="mineral_menu" name="Minéral" sequence="3"
+				 parent="composition_nourriture_menu" action="mineral_action"/>
+			<menuitem id="temps_repas_menu" name="Temps du repas" sequence="12"
+				 parent="nutrition_top" action="temps_repas_action"/>
+
+		<menuitem id="rdv_top" name="Rendez-vous" sequence="25" web_icon="onehealthy,static/description/rdv.png" action="rdv_action"/>
+		<menuitem id="attachement_top" name="Attachement" sequence="50" web_icon="onehealthy,static/description/attachement.png" action="attachment_action"/>
+
+		<menuitem id="medicament_top" name="Médicament" sequence="80" web_icon="onehealthy,static/description/menu_medicament.png"/>
+			<menuitem id="t_medicament_menu" name="Médicament" sequence="1"
+				parent="medicament_top" action="medicament_action"/>
+			<menuitem id="t_lait_menu" name="Lait" sequence="2"
+				parent="medicament_top" action="lait_action"/>
+
+		<menuitem id="parametre_top" name="Paramètres médicaux" sequence="100" web_icon="onehealthy,static/description/menu_parametre.png"/>
+			<menuitem id="parametre_antecedent_menu" name="Antécédent" sequence="5"
+				parent="parametre_top" action="antecedent_action"/>
+
+			<menuitem id="parametre_antecedent_" name="Antécédent" sequence="1"
+				parent="parametre_antecedent_menu" action="antecedent__action"/>
+			<menuitem id="parametre_antecedent__" name="Détail entécédent" sequence="5"
+				parent="parametre_antecedent_menu" action="antecedent_action"/>
+			
+			<menuitem id="parametre_consultation_menu" name="Consultation" sequence="10"
+				parent="parametre_top"/>
+				<menuitem id="diagnostic_menu" name="Diagnostic" sequence="1"
+				parent="parametre_consultation_menu" action="diagnostic_action"/>
+				<menuitem id="motif_consultation_menu" name="Motif de consultation" sequence="2"
+				parent="parametre_consultation_menu" action="motif_consultation_action"/>
+				<menuitem id="examen_biologique_menu" name="Examen biologique" sequence="10"
+				parent="parametre_consultation_menu" action="examen_biologique_action"/>
+				<menuitem id="examen_clinique_menu" name="Examen clinique" sequence="15"
+				parent="parametre_consultation_menu" action="examen_clinique_action"/>
+				<menuitem id="radiographie_menu" name="Radiographie" sequence="20"
+				parent="parametre_consultation_menu" action="radiographie_action"/>
+			
+			<menuitem id="parametre_medicament_menu" name="Médicament" sequence="10"
+				parent="parametre_top"/>
+				<menuitem id="medicament_menu" name="Médicament" sequence="1"
+				parent="parametre_medicament_menu" action="medicament_action"/>
+				<menuitem id="lait_menu" name="Lait" sequence="2"
+				parent="parametre_medicament_menu" action="lait_action"/>
+			
+			<menuitem id="parametre_autre_menu" name="Autres" sequence="100"
+				parent="parametre_top"/>
+				<menuitem id="maladie_enfance_menu" name="Maladie de l'enfance" sequence="1"
+				parent="parametre_autre_menu" action="maladie_enfance_action"/>
+				<menuitem id="profession_menu" name="Profession parent" sequence="2"
+				parent="parametre_autre_menu" action="profession_action"/>
+
+			<menuitem id="company_top" name="Service" sequence="120" web_icon="onehealthy,static/description/menu_company.png" action="base.action_res_company_form"/>
+
+			<menuitem id="user_top" name="Utilisateur" sequence="119" web_icon="onehealthy,static/description/menu_user.png" action="base.action_res_users"/>
+
+	</data>
+</odoo>
