@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FORM VIEW -->
+    <record id="diagnostic_view_form" model="ir.ui.view">
+        <field name="name">Diagnostic</field>
+        <field name="model">oh.diagnostic</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div name="smart_button" class="oe_right oe_button_box oe_inline">
+                        <button name="calcul_patient" 
+                                type="object"
+                                class="oe_stat_button"
+                                string="MAJ la liste des patients">
+                                <img src="/onehealthy/static/icon/children.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                    </div>
+                    <group/>
+                    <group col="4" colspan="4" string="Diagnostic">
+                        <field name="name" placeholder="Diagnostic"/>
+                        <field name="nombre_patient" />
+                    </group>
+                    <group string="Liste des patients"/>
+                    <div>
+                        <field name="patient_ids">
+                            <tree create="false" delete="false" edit="false">
+                                <field name="name"/>
+                                <field name="date_of_birth"/>
+                                <field name="age"/>
+                                <field name="gender"/>
+                                <field name="address_daira"/>
+                                <field name="address_wilaya"/>
+                            </tree>
+                        </field>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+	<!-- TREE VIEW -->
+    <record id='diagnostic_view_tree' model='ir.ui.view'>
+        <field name="name">Diagnostic</field>
+        <field name="model">oh.diagnostic</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <!--field name="patient_ids" widget="many2many_tags"-->
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="diagnostic_view_search" model="ir.ui.view">
+        <field name="name">Diagnostic</field>
+        <field name="model">oh.diagnostic</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Diagnostic"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='diagnostic_action' model='ir.actions.act_window'>
+        <field name="name">Diagnostic</field>
+        <field name="res_model">oh.diagnostic</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="diagnostic_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau diagnostic.
+          </p>
+        </field>
+    </record>
+</odoo>
