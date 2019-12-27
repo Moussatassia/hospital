@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- FORM VIEW -->
+    <record id="profession_view_form" model="ir.ui.view">
+        <field name="name">Profession</field>
+        <field name="model">oh.profession</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Profession">
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id='profession_view_tree' model='ir.ui.view'>
+        <field name="name">Profession</field>
+        <field name="model">oh.profession</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="profession_view_search" model="ir.ui.view">
+        <field name="name">Profession</field>
+        <field name="model">oh.profession</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Profession"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='profession_action' model='ir.actions.act_window'>
+        <field name="name">Profession</field>
+        <field name="res_model">oh.profession</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="profession_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer une nouvelle profession.
+          </p>
+        </field>
+    </record>
+</odoo>
