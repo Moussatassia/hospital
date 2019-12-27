@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- CONSULTATION -->
+    <record id="appel_consultation" model="ir.actions.act_window">
+        <field name="name">Consultation</field>
+        <field name="res_model">oh.consultation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_patient_id': active_id}</field>
+        <field name="domain">[('patient_id', '=', active_id)]</field>
+    </record>
+    <!-- RADIOLOGIE -->
+    <record id="appel_radiologie" model="ir.actions.act_window">
+        <field name="name">Radiologie</field>
+        <field name="res_model">oh.radiographie_consultation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_patient_id': active_id}</field>
+        <field name="domain">[('patient_id', '=', active_id)]</field>
+    </record>
+    <!-- EXAMEN BIOLOGIQUE -->
+    <record id="appel_examen_biologique" model="ir.actions.act_window">
+        <field name="name">Examen biologique</field>
+        <field name="res_model">oh.examen_biologique_consultation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_patient_id': active_id}</field>
+        <field name="domain">[('patient_id', '=', active_id)]</field>
+    </record>
+    <!-- RENDEZ-VOUS -->
+    <record id="appel_rdv" model="ir.actions.act_window">
+        <field name="name">Rendez-vous</field>
+        <field name="res_model">oh.rdv</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_patient_id': active_id}</field>
+        <field name="domain">[('patient_id', '=', active_id)]</field>
+    </record>
+    <!-- ATTACHEMENT -->
+    <record id="appel_attachement" model="ir.actions.act_window">
+        <field name="name">Attachement</field>
+        <field name="res_model">oh.attachment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_patient_id': active_id}</field>
+        <field name="domain">[('patient_id', '=', active_id)]</field>
+    </record>
+    <!-- REGIME -->
+    <record id="appel_regime" model="ir.actions.act_window">
+        <field name="name">Régime</field>
+        <field name="res_model">oh.regime</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_patient_id': active_id}</field>
+        <field name="domain">[('patient_id', '=', active_id)]</field>
+    </record>
+    <!-- FROM VIEW -->
+    <record id='patient_view_form' model='ir.ui.view'>
+        <field name="name">Patient</field>
+        <field name="model">oh.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div name="smart_button" class="oe_right oe_button_box oe_inline">
+                        <button name="%(appel_consultation)d" 
+                                type="action"
+                                class="oe_stat_button"
+                                >
+                                <img src="/onehealthy/static/icon/stethoscope.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                                <field name="nbr_consultation" widget="statinfo" string="Consultation"/>
+                        </button>
+                        <button name="%(appel_rdv)d" 
+                            type="action"
+                            class="oe_stat_button"
+                            string="Rendez-vous">
+                            <img src="/onehealthy/static/icon/calendar.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                        <button name="%(appel_regime)d" 
+                            type="action"
+                            class="oe_stat_button"
+                            string="Nutrition">
+                            <img src="/onehealthy/static/icon/diet.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                        <br/>
+                        <button name="%(appel_attachement)d" 
+                            type="action"
+                            class="oe_stat_button"
+                            string="Attachements">
+                            <img src="/onehealthy/static/icon/folder.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                        <button name="%(appel_radiologie)d" 
+                                type="action"
+                                class="oe_stat_button"
+                                string="Radiologie X">
+                                <img src="/onehealthy/static/icon/radio.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                        <button name="%(appel_examen_biologique)d" 
+                                type="action"
+                                class="oe_stat_button"
+                                string="Examen biologique">
+                                <img src="/onehealthy/static/icon/biologique.png" style="margin-top: 2px;margin-left: 7px;margin-right: 7px;height:25px;width:25px;float:left;"/>
+                        </button>
+                        <br/>
+                    </div>
+                    <div name="title_name" class="oe_title oe_left oe_inline">
+                        <h2>
+                            <field name="name" placeholder="Nom et prénom" required="1"/>
+                        </h2>
+                    </div>
+                    <br/>
+                    <group/>
+                    <notebook>
+                        <page string="Informations personnelles">
+                            <group/>
+                            <group col='4' colspan="4">
+                                <field name="date_of_birth"/>
+                                <field name="nationality_id" options="{'no_open': True}"/>
+                                <field name="gender" widget="radio"/>
+                                <field name="birthplace" context="{'default_country': nationality_id}" options="{'no_open': True}"/>
+                                <field name="age"/>
+                            </group>
+                            <group>
+                                <label for="address_cite" string="Adresse"/>
+                                <div class="o_address_format">
+                                    <field name="address_cite" placeholder="Cité ..." class="o_address_street"/>
+                                    <field name="address_daira" placeholder="Commune" class="o_address_city" options='{"no_open": True}'/>
+                                    <field name="address_wilaya" class="o_address_state" placeholder="Ville" options='{"no_open": True}'/>
+                                    <field name="adresse_cp" placeholder="Code postal" class="o_address_zip"/>
+                                    <field name="address_pays" placeholder="Pays" class="o_address_country" options='{"no_open": True}'/>
+                                </div>
+                            </group>
+                        </page>
+                        <page string="Informations complémentaires">
+                            <group/>
+                            <group col='4' colspan="4">
+                                <field name="diagnostic_ids" widget="many2many_tags"/>
+                                <field name="assurance_maladie" widget="radio"/>
+                                <field name="groupe_sanguin"/>
+                                <field name="maladie_enfance_id" widget="many2many_tags"/>
+                            </group>
+                            <group name="groupe_sanguin" col='4' colspan="4">
+                                
+                            </group>
+                            <notebook>
+                                <page string="Informations sur les parents">
+                                    <group/>
+                                    <field name="parent_ids">
+                                        <tree>
+                                            <field name="name"/>
+                                            <field name="type"/>
+                                            <field name="numero_telephone"/>
+                                        </tree>
+                                        <form>
+                                            <sheet>
+                                                <div name="title_name" class="oe_title oe_inline">
+                                                    <h1>
+                                                        <field name="name" placeholder="Nom et prénom"/>
+                                                    </h1>
+                                                </div>
+                                                <group/>
+                                                <group string="Informations personnelles" col='4' colspan="4">
+                                                    <field name="type"/>
+                                                    <field name="etat_sante"/>
+                                                    <field name="profession_id"/>
+                                                    <field name="situation"/>
+                                                    <field name="date_naissance"/>
+                                                    <field name="age"/>
+                                                </group>
+                                                <group col='4' colspan="4">
+                                                    <group string="Groupe sanguin" col='2' colspan="2">
+                                                        <field name="groupe_sanguin"/>
+                                                        <field name="phenotype_id"/>
+                                                    </group>
+                                                    <group string="Coordonnées de contact" col='2' colspan="2">
+                                                        <field name="numero_telephone" widget="mask" data-inputmask-mask="9999 99 99 99"/>
+                                                        <field name="adresse_electronique"/>
+                                                    </group>
+                                                </group>
+                                            </sheet>
+                                        </form>
+                                    </field>
+                                </page>
+                                <page name="fratires" string="Informations sur les lieux de résidence">
+                                    <group/>
+                                    <field name="lieu_ids">
+                                        <tree editable="bottom">
+                                            <field name="address"/>
+                                            <field name="de"/>
+                                            <field name="a"/>
+                                            <field name="note"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Historique poids / taille">
+                                    <group/>
+                                    <field name="historique_poids_taille_ids">
+                                        <tree editable="bottom">
+                                            <field name="date"/>
+                                            <field name="poids"/>
+                                            <field name="taille"/>
+                                            <field name="age"/>
+                                            <field name="age_mois"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Médecins traitants">
+                                    <group/>
+                                    <field name="medecin_traitant_ids">
+                                        <tree editable="bottom">
+                                            <field name="medecin_id"/>
+                                            <field name="wilaya"/>
+                                            <field name="numero_telephone"/>
+                                            <field name="adresse_electronique"/>
+                                            <field name="autre"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </page>
+                        <page name="antecedent" string="Antécédents">
+                            <group/>
+                            <div>
+                                <field name="antecedent_ids">
+                                    <tree editable="bottom" default_order="antecedent_id">
+                                        <field name="antecedent_id"/>
+                                        <field name="antecedent_detail_id"/>
+                                        <field name="note"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </page>
+                        <page string="Rendez-vous">
+                            <group/>
+                            <div>
+                                <field name="rdv_ids">
+                                    <tree>
+                                        <field name="date"/>
+                                        <field name="user_id"/>
+                                        <field name="state"/>
+                                    </tree>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="user_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                                                    <field name="date"/>
+                                                </group>
+                                                <group class="oe_subtotal_footer oe_right">
+                                                    <field name="company_id" invisible="1"/>
+                                                </group>
+                                            </group>
+                                            <group/>
+                                            <label for="description"/>
+                                            <div>
+                                                <field name="description" placeholder="Notes sur la pièce jointe..."/>
+                                            </div>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </div>
+                        </page>
+                        <page string="Attachement">
+                            <group/>
+                            <div>
+                                <field name="attachment_ids" context="{'default_patient_id':active_id}">
+                                    <form>
+                                        <sheet>
+                                            <label for="name"/>
+                                            <h1>
+                                                <field name="name"/>
+                                            </h1>
+                                            <br/>
+                                            <group col='4' colspan="4">
+                                                <field name="user_id" readonly="1"/>
+                                                <field name="date" readonly="1"/>
+                                                <field name="datas" filename="datas_fname" />
+                                                <field name="datas_fname" invisible="1" class="oe_inline oe_right"/>
+                                            </group>
+                                            <label for="description"/>
+                                            <div>
+                                                <field name="description" placeholder="Notes sur la pièce jointe..."/>
+                                            </div>
+                                        </sheet>
+                                    </form>
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="datas_fname"/>
+                                        <field name="date"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+	<!-- TREE VIEW -->
+    <record id='patient_view_tree' model='ir.ui.view'>
+        <field name="name">Patient</field>
+        <field name="model">oh.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+            	<field name="name"/>
+            	<field name="date_of_birth"/>
+            	<field name="age"/>
+                <field name="gender"/>
+                <field name="address_daira"/>
+                <field name="address_wilaya"/>
+                <field name="assurance_maladie"/>
+            </tree>
+        </field>
+    </record>
+    <!-- KANBAN VIEW -->
+    <record id="patient_view_kanban" model="ir.ui.view">
+        <field name="name">Patient</field>
+        <field name="model">oh.patient</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_res_partner_kanban">
+                            <div class="oe_kanban_details">
+                                <strong class="oe_partner_heading"><field name="name"/></strong>
+                                <ul>
+                                    <li t-if="record.date_of_birth.raw_value">Date de naissance : <field name="date_of_birth"/></li>
+                                    <li t-if="record.age.raw_value">Âge : <field name="age"/></li>
+                                    <li t-if="record.gender.raw_value">Sexe : <field name="gender"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <!-- RECHERCHE -->
+    <record id="patient_view_search" model="ir.ui.view">
+        <field name="name">Patient</field>
+        <field name="model">oh.patient</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Patient"/> 
+                <field name="date_of_birth" string="Date de naissance"/>
+                <field name="assurance_maladie" string="Assurance maladie"/>
+                <field name="gender" string="Sexe"/>
+                <field name="address_daira" string="Commune"/>
+                <field name="address_wilaya" string="Wilaya"/>
+                <newline />
+                <group expand="0" string="Group By...">
+                    <filter name="assurance_maladie" string="Assurance maladie" context="{'group_by':'assurance_maladie'}" />
+                    <filter name="gender" string="Sexe" context="{'group_by':'gender'}" />
+                    <filter name="address_daira" string="Commune" context="{'group_by':'address_daira'}" />
+                    <filter name="address_wilaya" string="Wilaya" context="{'group_by':'address_wilaya'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- ACTION -->
+    <record id='patient_action' model='ir.actions.act_window'>
+        <field name="name">Patient</field>
+        <field name="res_model">oh.patient</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="patient_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer un nouveau patient.
+          </p>
+        </field>
+    </record>
+</odoo>
