@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- FORM VIEW -->
+    <record id="valeur_nutritionnelle_view_form" model="ir.ui.view">
+        <field name="name">Valeur nutritionnelle</field>
+        <field name="model">oh.valeur_nutritionnelle</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Valeur nutritionnelle">
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE VIEW -->
+    <record id='valeur_nutritionnelle_view_tree' model='ir.ui.view'>
+        <field name="name">Valeur nutritionnelle</field>
+        <field name="model">oh.valeur_nutritionnelle</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- RECHERCHE -->
+    <record id="valeur_nutritionnelle_view_search" model="ir.ui.view">
+        <field name="name">Valeur nutritionnelle</field>
+        <field name="model">oh.valeur_nutritionnelle</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Valeur nutritionnelle"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id='valeur_nutritionnelle_action' model='ir.actions.act_window'>
+        <field name="name">Valeur nutritionnelle</field>
+        <field name="res_model">oh.valeur_nutritionnelle</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="valeur_nutritionnelle_view_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Cliquez pour créer une nouvelle valeur nutritionnelle.
+          </p>
+        </field>
+    </record>
+</odoo>
