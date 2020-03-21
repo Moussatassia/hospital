@@ -24,7 +24,7 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <group string="Informations de le Rdv">
+                        <group string="Informations du Rdv">
                             <field name="numero"/>
                             <field name="code"/>
                             <field name="nom"/>
